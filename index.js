@@ -1,5 +1,4 @@
-let nombre = prompt("Bienvenide a Punto de Observacion, tu recomendador de salidas. Cual es tu nombre?");
-// let destino = prompt("Hola " +nombre+ ". Donde te gustaria viajar? (Elegir entre Cordoba y Mendoza)");
+let nombre = prompt("Bienvenide a Punto de Observacion, tu calculadora de viajes. Cual es tu nombre?");
 
 function traslado (kilometros, valor) {
     let valorKilometro = kilometros * valor;
@@ -13,11 +12,12 @@ function hospedaje (dias, valor) {
 
 function costoViaje (valorHospedaje, valorKilometro) {
     costo = valorHospedaje + valorKilometro;
-    alert ("El costo de tu viaje es de: "+ costo);
+    alert ("El costo de tu viaje es de: $"+ costo);
+    return costo
 }
 
 function destinoPosible (presupuesto, costoTotal) {
-    if (presupesto>costoTotal) {
+    if (parseFloat(presupuesto)>parseFloat(costoTotal)) {
         alert("Tu viaje ha sido reservado");
     }
     else {
@@ -37,11 +37,52 @@ function calculadora() {
         if (destinoSeleccionado !=="") {
             let presupuesto = parseFloat(prompt("Hermoso destino. Para continuar, contanos tu presupuesto estimado."));
             let dias= parseFloat(prompt("Por ultimo: Cuantos dias te gustaria hospedarte?")); 
-
+            const valorKilometro = 50;
             destinoSeleccionado = parseInt(destinoSeleccionado);
+            
+            if (!isNaN(destinoSeleccionado)){
+
+                switch(destinoSeleccionado){
+
+                    case 1:
+                        let costoHotelCordoba= 1500;
+                        let costoTrasladoCordoba = traslado (800,valorKilometro);
+                        let costoHospedajeCordoba = hospedaje (dias, costoHotelCordoba );
+                        costoViaje = costoViaje(costoTrasladoCordoba, costoHospedajeCordoba);
+                        destinoPosible(presupuesto, costoViaje);
+                        break;
+
+                    case 2:
+                        let costoHotelSantaFe= 1000;
+                        let costoTrasladoSantaFe = traslado (500,valorKilometro);
+                        let costoHospedajeSantaFe = hospedaje (dias, costoHotelSantaFe );
+                        costoViaje = costoViaje(costoTrasladoSantaFe, costoHospedajeSantaFe);
+                        destinoPosible(presupuesto, costoViaje);
+                        break;
+
+                    case 3:
+                        let costoHotelChubut= 2500;
+                        let costoTrasladoChubut = traslado (900,valorKilometro);
+                        let costoHospedajeChubut = hospedaje (dias, costoHotelChubut );
+                        costoViaje = costoViaje(costoTrasladoChubut, costoHospedajeChubut);
+                        destinoPosible(presupuesto, costoViaje);
+                        break;
+
+                    case 4:
+                        let costoHotelRioNegro= 3000;
+                        let costoTrasladoRioNegro = traslado (1000,valorKilometro);
+                        let costoHospedajeRioNegro = hospedaje (dias, costoHotelRioNegro );
+                        costoViaje(costoTrasladoRioNegro, costoHospedajeRioNegro);
+                        destinoPosible(presupuesto, costoViaje);
+                        break;
+                }
+            }
+        } else {
+            alert("Elige un destino por favor");
         }
+        destinoSeleccionado = opcionesDestino();
     }
 }
 
-
+calculadora();
 
